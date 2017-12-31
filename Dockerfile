@@ -45,7 +45,7 @@ WORKDIR /root
 
 COPY rootfs /
 
-VOLUME /web
+# VOLUME /web
 
 COPY web /web/html
 

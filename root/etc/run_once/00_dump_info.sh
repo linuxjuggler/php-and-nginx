@@ -6,4 +6,4 @@
 # (c) 2017 nimmis <kjell.havneskold@gmail.com>
 #
 
-cat /etc/BUILDS/*
+# cat /etc/BUILDS/*

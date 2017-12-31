@@ -22,8 +22,6 @@ RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add ca-certificates rsyslog logrotate runit && \
-    mkdir -p /etc/BUILDS/ && \
-    printf "Build of nimmis/alpine-micro:3.7, date: %s\n"  `date -u +"%Y-%m-%dT%H:%M:%SZ"` > /etc/BUILDS/alpine-micro && \
     apk add curl && \
     cd /tmp && \
     curl -Ls https://github.com/nimmis/docker-utils/archive/master.tar.gz | tar xfz - && \

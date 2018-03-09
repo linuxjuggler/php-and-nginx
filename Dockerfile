@@ -18,16 +18,16 @@ LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
 
 COPY root/. /
 
-RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
+RUN set -ex \
+    echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add ca-certificates rsyslog logrotate runit && \
-    apk add curl && \
+    apk add --no-cache git curl openssh-client ca-certificates rsyslog logrotate runit curl && \
+    apk add --no-cache --virtual build-dependencies g++ make autoconf && \
     cd /tmp && \
     curl -Ls https://github.com/nimmis/docker-utils/archive/master.tar.gz | tar xfz - && \
     ./docker-utils-master/install.sh && \
     rm -Rf ./docker-utils-master && \
-    apk del curl && \
     docker-php-source extract && \
     pecl install redis && \
     docker-php-ext-enable redis && \
@@ -39,7 +39,9 @@ RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     apk add nginx && \
     mkdir /web && mkdir /run/nginx && \
-    rm -rf /var/cache/apk/*
+    rm -rf /var/cache/apk/* && \
+    apk del build-dependencies && \
+    rm -rf /tmp/*
 
 # Set environment variables.
 ENV HOME /root

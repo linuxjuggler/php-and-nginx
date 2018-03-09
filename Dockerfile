@@ -28,6 +28,10 @@ RUN echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/
     ./docker-utils-master/install.sh && \
     rm -Rf ./docker-utils-master && \
     apk del curl && \
+    docker-php-source extract && \
+    pecl install redis && \
+    docker-php-ext-enable redis && \
+    docker-php-source delete \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
     sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \

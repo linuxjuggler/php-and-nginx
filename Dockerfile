@@ -29,8 +29,8 @@ RUN set -ex \
     ./docker-utils-master/install.sh && \
     rm -Rf ./docker-utils-master && \
     docker-php-source extract && \
-    pecl install redis && \
-    docker-php-ext-enable redis && \
+    pecl install redis opcache && \
+    docker-php-ext-enable redis opcache && \
     docker-php-source delete && \
     docker-php-ext-install intl sockets && \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \

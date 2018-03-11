@@ -32,7 +32,7 @@ RUN set -ex \
     pecl install redis && \
     docker-php-ext-enable redis && \
     docker-php-source delete && \
-    docker-php-ext-install intl opcahe sockets && \
+    docker-php-ext-install intl sockets && \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
     sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \

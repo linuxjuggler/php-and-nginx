@@ -22,7 +22,7 @@ RUN set -ex \
     echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add --no-cache git curl openssh-client ca-certificates rsyslog logrotate runit curl && \
+    apk add --no-cache git curl openssh-client ca-certificates icu rsyslog logrotate runit curl && \
     apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf && \
     cd /tmp && \
     curl -Ls https://github.com/nimmis/docker-utils/archive/master.tar.gz | tar xfz - && \

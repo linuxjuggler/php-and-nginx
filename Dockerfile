@@ -22,8 +22,10 @@ RUN set -ex \
     echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add --no-cache git curl openssh-client ca-certificates icu rsyslog logrotate runit curl && \
-    apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf && \
+    apk add --no-cache git curl openssh-client ca-certificates icu rsyslog logrotate runit curl \
+            icu libpng freetype libjpeg-turbo postgresql-dev libffi-dev && \
+    apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf \
+            libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev && \
     cd /tmp && \
     curl -Ls https://github.com/nimmis/docker-utils/archive/master.tar.gz | tar xfz - && \
     ./docker-utils-master/install.sh && \
@@ -32,12 +34,15 @@ RUN set -ex \
     pecl install redis opcache && \
     docker-php-ext-enable redis opcache && \
     docker-php-source delete && \
-    docker-php-ext-install intl sockets pdo  pdo_mysql && \
+    docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
+    docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_pgsql zip gd && \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
     sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \
     sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
     apk add nginx && \
     mkdir /web && mkdir /run/nginx && \
     rm -rf /var/cache/apk/* && \

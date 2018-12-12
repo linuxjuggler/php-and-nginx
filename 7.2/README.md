@@ -6,7 +6,7 @@ This image was built based on the scripts that I have found at [docker-alpine-mi
 
 This is still new/simple docker image which will have:
 
-1. PHP7.x
+1. PHP7.2
 2. Nginx
 3. Crond
 4. rsyslogd
@@ -46,41 +46,6 @@ This is still new/simple docker image which will have:
 1. xmlwriter
 1. zlib
 
-## GD information
+## Configuration
 
-GD Support => enabled
-GD Version => bundled (2.1.0 compatible)
-FreeType Support => enabled
-FreeType Linkage => with freetype
-FreeType Version => 2.8.1
-GIF Read Support => enabled
-GIF Create Support => enabled
-JPEG Support => enabled
-libJPEG Version => 8
-PNG Support => enabled
-libPNG Version => 1.6.34
-WBMP Support => enabled
-XBM Support => enabled
-
-Directive => Local Value => Master Value
-gd.jpeg_ignore_warning => 1 => 1
-
-## Xdebug Image
-
-You can pull xdebug image which has xdebug enabled by default, to disable it you need to create a .env file which should contain the following variables, but remember to change the value based one what you want to achieve:
-
-PHP_XDEBUG_DEFAULT_ENABLE=0
-PHP_XDEBUG_REMOTE_ENABLE=0
-PHP_XDEBUG_REMOTE_HOST=127.0.0.1
-PHP_XDEBUG_REMOTE_PORT=9001
-PHP_XDEBUG_REMOTE_AUTO_START=0
-PHP_XDEBUG_REMOTE_CONNECT_BACK=0
-PHP_XDEBUG_IDEKEY=docker
-PHP_XDEBUG_PROFILER_ENABLE=0
-PHP_XDEBUG_PROFILER_OUTPUT_DIR=/tmp
-
-Then run the docker and specify the env file that you have created like this
-
-```
-docker run --env-file .env -p 80:80 zaherg/php-and-nginx:xdebug
-```
+Will add more soon.

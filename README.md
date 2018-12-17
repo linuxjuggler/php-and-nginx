@@ -11,6 +11,14 @@ This is still new/simple docker image which will have:
 3. Crond
 4. rsyslogd
 
+## Versions available
+
+1. zaherg/php-xdebug-alpine:7.2
+1. zaherg/php-xdebug-alpine:7.3
+1. zaherg/php-xdebug-alpine:xdebug
+
+*Latest* will always be used with the latest PHP version
+
 ## PHP Modules
 
 1. Core

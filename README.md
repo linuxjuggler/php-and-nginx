@@ -13,9 +13,9 @@ This is still new/simple docker image which will have:
 
 ## Versions available
 
-1. zaherg/php-xdebug-alpine:7.2
-1. zaherg/php-xdebug-alpine:7.3
-1. zaherg/php-xdebug-alpine:xdebug
+1. zaherg/php-and-nginx:7.2
+1. zaherg/php-and-nginx:7.3
+1. zaherg/php-and-nginx:xdebug
 
 *Latest* will always be used with the latest PHP version
 

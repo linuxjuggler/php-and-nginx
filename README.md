@@ -79,6 +79,11 @@ gd.jpeg_ignore_warning => 1 => 1
 You can pull xdebug image which has xdebug enabled by default, to disable it you need to create a .env file which should contain the following variables, but remember to change the value based one what you want to achieve:
 
 ```
+PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
+PHP_OPCACHE_MAX_ACCELERATED_FILES=10000
+PHP_OPCACHE_MEMORY_CONSUMPTION=192
+PHP_OPCACHE_MAX_WASTED_PERCENTAGE=10
+
 PHP_XDEBUG_DEFAULT_ENABLE=0
 PHP_XDEBUG_REMOTE_ENABLE=0
 PHP_XDEBUG_REMOTE_HOST=127.0.0.1

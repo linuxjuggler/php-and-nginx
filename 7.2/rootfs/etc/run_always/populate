@@ -4,12 +4,9 @@
 
 if [ ! -d /web/html ]; then
   mkdir /web/html
-  echo "<html>
-  <body>
-    <h1>It Works!</h1>
-    Docker container with Nginx on Alpine <a href=https://hub.docker.com/r/nimmis/alpine-nginx/>nimmis/alpine-nginx</a>
-  </body>
-</html>" > /web/html/index.html
+  echo "<?php
+
+phpinfo();" > /web/html/index.php
   chown -R nginx.nginx /web/html
 fi
 

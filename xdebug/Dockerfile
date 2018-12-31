@@ -48,10 +48,6 @@ WORKDIR /root
 
 COPY rootfs /
 
-# VOLUME /web
-
-COPY web /web/html
-
 EXPOSE 80 443
 
 # Define default command.

@@ -7,7 +7,7 @@ ARG DOCKER_REPO
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
-      org.label-schema.name="zaherg/php-and-nginx:latest" \
+      org.label-schema.name="zaherg/php-and-nginx:7.2" \
       org.label-schema.description="Lightweight container with Nginx 1.12 & PHP-FPM 7.2 based on Alpine Linux." \
       org.label-schema.url="https://www.zah.me" \
       org.label-schema.build-date=$BUILD_DATE \
@@ -36,7 +36,7 @@ RUN set -ex \
     docker-php-source delete && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_mysql pdo_pgsql zip gd && \
+    docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath && \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
     sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \

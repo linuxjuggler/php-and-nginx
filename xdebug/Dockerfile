@@ -22,19 +22,20 @@ RUN set -ex \
     echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add --no-cache git curl openssh-client ca-certificates icu rsyslog logrotate runit libzip-dev curl && \
+    apk add --no-cache nginx git curl openssh-client ca-certificates icu rsyslog logrotate runit libzip-dev curl && \
     apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf && \
     cd /tmp && \
     curl -Ls https://github.com/nimmis/docker-utils/archive/master.tar.gz | tar xfz - && \
     ./docker-utils-master/install.sh && \
     rm -Rf ./docker-utils-master && \
     docker-php-ext-install -j$(nproc) intl opcache bcmath && \
-    sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
-    sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
+    sed -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
+    sed -i 's/module(load="imklog")/#module(load="imklog")/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \
     sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
-    apk add nginx && \
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer global require hirak/prestissimo && \
     mkdir /web && mkdir /run/nginx && \
     rm -rf /var/cache/apk/* && \
     apk del build-dependencies && \

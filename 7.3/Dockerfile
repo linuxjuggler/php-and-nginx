@@ -43,6 +43,7 @@ RUN set -ex \
     sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer global require hirak/prestissimo && \
     mkdir /run/nginx && \
     rm -rf /var/cache/apk/* /var/www/localhost /var/www/html && \
     apk del build-dependencies && \

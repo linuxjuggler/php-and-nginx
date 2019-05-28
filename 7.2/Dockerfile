@@ -38,7 +38,7 @@ RUN set -ex \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
     docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath && \
     sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
-    sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
+    sed -i 's/module(load="imklog")/#module(load="imklog")/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \
     sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \

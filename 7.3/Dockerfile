@@ -22,7 +22,7 @@ RUN set -ex \
     echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk update && apk upgrade && \
-    apk add --no-cache git curl openssh-client ca-certificates icu rsyslog logrotate runit curl \
+    apk add --no-cache nginx git curl openssh-client ca-certificates icu rsyslog logrotate runit curl \
             icu libpng freetype libjpeg-turbo postgresql-dev libffi-dev libzip-dev && \
     apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf \
             libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev && \
@@ -36,16 +36,15 @@ RUN set -ex \
     docker-php-source delete && \
     docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && \
-    docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath && \
-    sed  -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
-    sed -i 's/$ModLoad imklog/#$ModLoad imklog/' /etc/rsyslog.conf && \
+    docker-php-ext-install -j"$(nproc)" intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath && \
+    sed -i "s|\*.emerg|\#\*.emerg|" /etc/rsyslog.conf && \
+    sed -i 's/module(load="imklog")/#module(load="imklog")/' /etc/rsyslog.conf && \
     sed -i 's/$KLogPermitNonKernelFacility on/#$KLogPermitNonKernelFacility on/' /etc/rsyslog.conf && \
     sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
-    apk add nginx && \
-    mkdir /web && mkdir /run/nginx && \
-    rm -rf /var/cache/apk/* && \
+    mkdir /run/nginx && \
+    rm -rf /var/cache/apk/* /var/www/localhost /var/www/html && \
     apk del build-dependencies && \
     rm -rf /tmp/*
 

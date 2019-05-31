@@ -19,6 +19,36 @@ This is still new/simple docker image which will have:
 
 *Latest* will always be used with the latest PHP version
 
+
+## Using php-and-nginx as your base image
+
+This is a sample docker file which is used to build Laravel Application
+
+```dockerfile
+FROM zaherg/php-and-nginx:7.3
+
+ENV APP_ENV production
+
+COPY . /web/html
+
+WORKDIR /web/html
+
+RUN composer install  --prefer-dist --no-ansi --no-interaction --no-scripts --no-progress --no-suggest --optimize-autoloader --no-dev \
+	&& sed -i 's/root \/web\/html;/root \/web\/html\/public;/' /etc/nginx/nginx.conf \
+	&& chgrp -R nobody /web/html/storage /web/html/bootstrap/cache \
+    && chmod -R ug+rwx /web/html/storage /web/html/bootstrap/cache \
+    && chown -R nginx /web/html/storage /web/html/bootstrap/cache
+```
+
+We copy the code to the `/web/html`, since the root location for my web pages defined inside nginx configuration as 
+`web/html` we run a small sed command to replace it with the root location for our Laravel application
+
+```shell
+sed -i 's/root \/web\/html;/root \/web\/html\/public;/' /etc/nginx/nginx.conf
+```
+
+**Small note**: The user we use here is `root` feel free to change it.
+
 ## PHP Modules
 
 1. Core

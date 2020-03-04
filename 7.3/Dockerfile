@@ -6,9 +6,9 @@ ARG IMAGE_NAME
 ARG DOCKER_REPO
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-LABEL Maintainer="Mhd Zaher Ghaibeh <z@zah.me>" \
-      org.label-schema.name="zaherg/php-and-nginx:latest" \
-      org.label-schema.description="Lightweight container with Nginx 1.12 & PHP-FPM 7.2 based on Alpine Linux." \
+LABEL Maintainer="Mhd Zaher Ghaibeh <zaher@zah.me>" \
+      org.label-schema.name="zaherg/php-and-nginx:7.3" \
+      org.label-schema.description="Lightweight container with Nginx & PHP-FPM 7.3 based on Alpine Linux." \
       org.label-schema.url="https://www.zah.me" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/linuxjuggler/php-and-nginx.git" \

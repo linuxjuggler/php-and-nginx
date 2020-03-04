@@ -7,25 +7,27 @@ This image was built based on the scripts that I have found at [docker-alpine-mi
 This is still new/simple docker image which will have:
 
 1. PHP7.x
-2. Nginx
-3. Crond
-4. rsyslogd
+2. Nginx (with h5bp)
 
 ## Versions available
 
 1. zaherg/php-and-nginx:7.2
 1. zaherg/php-and-nginx:7.3
+1. zaherg/php-and-nginx:7.4
 1. zaherg/php-and-nginx:xdebug
 
 *Latest* will always be used with the latest PHP version
 
+### NOTE:
+
+Starting from 2020, We have removed `crond` and `rsyslogd`  and they wont be installed nor activated any more.
 
 ## Using php-and-nginx as your base image
 
 This is a sample docker file which is used to build Laravel Application
 
 ```dockerfile
-FROM zaherg/php-and-nginx:7.3
+FROM zaherg/php-and-nginx:7.4
 
 ENV APP_ENV production
 
@@ -48,6 +50,17 @@ sed -i 's/root \/web\/html;/root \/web\/html\/public;/' /etc/nginx/nginx.conf
 ```
 
 **Small note**: The user we use here is `root` feel free to change it.
+
+### OpCache
+
+You can manage opcache using the environment variables
+
+```
+PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
+PHP_OPCACHE_MAX_ACCELERATED_FILES=10000
+PHP_OPCACHE_MEMORY_CONSUMPTION=192
+PHP_OPCACHE_MAX_WASTED_PERCENTAGE=10
+```
 
 ## PHP Modules
 

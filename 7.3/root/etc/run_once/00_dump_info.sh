@@ -1,9 +1,7 @@
 #!/bin/sh
-#
-# Show information about container to standard output
-#
-#
-# (c) 2017 nimmis <kjell.havneskold@gmail.com>
-#
 
-# cat /etc/BUILDS/*
+# popolate /web if empty
+
+if [ ! -d /web/html ]; then
+  mkdir -p /web/html
+fi

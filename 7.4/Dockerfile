@@ -37,6 +37,9 @@ RUN cd /tmp && curl -Ls https://github.com/nimmis/docker-utils/archive/master.ta
     && ./docker-utils-master/install.sh && rm -Rf ./docker-utils-master \
     && rm -fr /etc/sv && rm -f /etc/service/crond /etc/service/rsyslogd
 
+RUN sed -i 's/echo "Run scripts is \/etc\/run_always"/#echo "Run scripts is \/etc\/run_always"/' /etc/runit/1 \
+    && sed -i 's/find \/etc\/run_always/#find \/etc\/run_always/' /etc/runit/1
+
 RUN docker-php-source extract \
     && pecl install redis opcache \
     && docker-php-ext-enable redis opcache \

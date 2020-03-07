@@ -14,13 +14,13 @@ This is still new/simple docker image which will have:
 1. zaherg/php-and-nginx:7.2
 1. zaherg/php-and-nginx:7.3
 1. zaherg/php-and-nginx:7.4
-1. zaherg/php-and-nginx:xdebug
 
 *Latest* will always be used with the latest PHP version
 
 ### NOTE:
 
-Starting from 2020, We have removed `crond` and `rsyslogd`  and they wont be installed nor activated any more.
+1. Starting from 2020, We have removed `crond` and `rsyslogd`  and they wont be installed nor activated any more.
+1. Also we removed xdebug as it is pointless to have it.
 
 ## Using php-and-nginx as your base image
 
@@ -115,31 +115,4 @@ XBM Support => enabled
 
 Directive => Local Value => Master Value
 gd.jpeg_ignore_warning => 1 => 1
-```
-
-## Xdebug Image
-
-You can pull xdebug image which has xdebug enabled by default, to disable it you need to create a .env file which should contain the following variables, but remember to change the value based one what you want to achieve:
-
-```
-PHP_OPCACHE_VALIDATE_TIMESTAMPS=0
-PHP_OPCACHE_MAX_ACCELERATED_FILES=10000
-PHP_OPCACHE_MEMORY_CONSUMPTION=192
-PHP_OPCACHE_MAX_WASTED_PERCENTAGE=10
-
-PHP_XDEBUG_DEFAULT_ENABLE=0
-PHP_XDEBUG_REMOTE_ENABLE=0
-PHP_XDEBUG_REMOTE_HOST=127.0.0.1
-PHP_XDEBUG_REMOTE_PORT=9001
-PHP_XDEBUG_REMOTE_AUTO_START=0
-PHP_XDEBUG_REMOTE_CONNECT_BACK=0
-PHP_XDEBUG_IDEKEY=docker
-PHP_XDEBUG_PROFILER_ENABLE=0
-PHP_XDEBUG_PROFILER_OUTPUT_DIR=/tmp
-```
-
-Then run the docker and specify the env file that you have created like this
-
-```
-docker run --env-file .env -p 80:80 zaherg/php-and-nginx:xdebug
 ```

@@ -50,7 +50,6 @@ RUN docker-php-source extract \
 
 RUN sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf \
-    && composer global require hirak/prestissimo \
     && mkdir /run/nginx
 
 RUN rm -rf /var/cache/apk/* /var/www/localhost /var/www/html \

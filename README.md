@@ -15,6 +15,8 @@ This is still new/simple docker image which will have:
 1. zaherg/php-and-nginx:7.3
 1. zaherg/php-and-nginx:7.4
 
+> These images were also published to [github packages](https://github.com/users/zaherg/packages/container/package/php-and-nginx)
+
 *Latest* will always be used with the latest PHP version
 
 ### NOTE:

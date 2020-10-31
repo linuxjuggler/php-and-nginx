@@ -18,7 +18,7 @@ jobs:
 
   building:
     if: github.event_name != 'pull_request'
-    name: Build & Push [ghcr]
+    name: Build & Push
 
     runs-on: ubuntu-latest
 
@@ -38,6 +38,9 @@ jobs:
         run: |
           VERSION=${{ matrix.php-version }}
           TAGS="${DOCKER_IMAGE}:${VERSION}"
+          if [[ $VERSION =="7.4" ]]; then
+            TAGS="$TAGS,${DOCKER_IMAGE}:latest"
+          fi          
           echo ::set-output name=version::${VERSION}
           echo ::set-output name=tags::${TAGS}
           echo ::set-output name=created::$(date -u +'%Y-%m-%dT%H:%M:%SZ')

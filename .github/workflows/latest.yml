@@ -19,7 +19,6 @@ jobs:
   building:
     if: github.event_name != 'pull_request'
     name: Build & Push [ghcr]
-    needs: ['phpunit']
 
     runs-on: ubuntu-latest
 

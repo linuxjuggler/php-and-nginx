@@ -1,4 +1,4 @@
-[![](https://images.microbadger.com/badges/version/zaherg/php-and-nginx.svg)](https://microbadger.com/images/zaherg/php-and-nginx "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/zaherg/php-and-nginx.svg)](https://microbadger.com/images/zaherg/php-and-nginx "Get your own commit badge on microbadger.com")  [![](https://img.shields.io/badge/sponsor-using%20BTC%20lightning%20network-blue.svg)](https://tippin.me/@zaherg)
+![Published](https://github.com/zaherg/php-and-nginx/workflows/Publishing%20To%20ghcr/badge.svg?branch=master) [![](https://images.microbadger.com/badges/version/zaherg/php-and-nginx.svg)](https://microbadger.com/images/zaherg/php-and-nginx "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/zaherg/php-and-nginx.svg)](https://microbadger.com/images/zaherg/php-and-nginx "Get your own commit badge on microbadger.com")  [![](https://img.shields.io/badge/sponsor-using%20BTC%20lightning%20network-blue.svg)](https://tippin.me/@zaherg)
 
 # PHP And Nginx Docker image
 

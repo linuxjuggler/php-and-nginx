@@ -26,7 +26,7 @@ jobs:
       fail-fast: false
       max-parallel: 15
       matrix:
-        php-version: ['7.2','7.3','7.4']
+        php-version: ['7.4', '8.0']
 
     steps:
       - uses: actions/checkout@v2
@@ -38,7 +38,7 @@ jobs:
         run: |
           VERSION=${{ matrix.php-version }}
           TAGS="${DOCKER_IMAGE}:${VERSION}"
-          if [[ $VERSION == "7.4" ]]; then
+          if [[ $VERSION == "8.0" ]]; then
             TAGS="$TAGS,${DOCKER_IMAGE}:latest"
           fi          
           echo ::set-output name=version::${VERSION}

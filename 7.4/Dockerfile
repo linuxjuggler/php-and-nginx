@@ -11,10 +11,10 @@ ENV PHP_OPCACHE_MAX_ACCELERATED_FILES ${PHP_OPCACHE_MAX_ACCELERATED_FILES:-10000
 ENV PHP_OPCACHE_MEMORY_CONSUMPTION ${PHP_OPCACHE_MEMORY_CONSUMPTION:-192}
 ENV PHP_OPCACHE_MAX_WASTED_PERCENTAGE ${PHP_OPCACHE_MAX_WASTED_PERCENTAGE:-10}
 
-LABEL Maintainer="Mhd Zaher Ghaibeh <zaher@zah.me>" \
+LABEL Maintainer="Mhd Zaher Ghaibeh " \
       org.label-schema.name="zaherg/php-and-nginx:latest" \
       org.label-schema.description="Lightweight container with Nginx & PHP-FPM 7.4 based on Alpine Linux." \
-      org.label-schema.url="https://www.zah.me" \
+      org.label-schema.url="https://www.zaher.dev" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/zaherg/php-and-nginx.git" \
       org.label-schema.vcs-ref=$VCS_REF \

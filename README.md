@@ -11,9 +11,10 @@ This is still new/simple docker image which will have:
 
 ## Versions available
 
-1. zaherg/php-and-nginx:7.2
-1. zaherg/php-and-nginx:7.3
+1. zaherg/php-and-nginx:7.2 **Not active any more**
+1. zaherg/php-and-nginx:7.3 **Not active any more**
 1. zaherg/php-and-nginx:7.4
+1. zaherg/php-and-nginx:8.0
 
 > These images were also published to [github packages](https://github.com/users/zaherg/packages/container/package/php-and-nginx)
 

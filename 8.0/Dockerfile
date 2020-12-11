@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:8.0-fpm-alpine
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,9 +11,9 @@ ENV PHP_OPCACHE_MAX_ACCELERATED_FILES ${PHP_OPCACHE_MAX_ACCELERATED_FILES:-10000
 ENV PHP_OPCACHE_MEMORY_CONSUMPTION ${PHP_OPCACHE_MEMORY_CONSUMPTION:-192}
 ENV PHP_OPCACHE_MAX_WASTED_PERCENTAGE ${PHP_OPCACHE_MAX_WASTED_PERCENTAGE:-10}
 
-LABEL Maintainer="Mhd Zaher Ghaibeh " \
-      org.label-schema.name="zaherg/php-and-nginx:7.2" \
-      org.label-schema.description="Lightweight container with Nginx & PHP-FPM 7.2 based on Alpine Linux." \
+LABEL Maintainer="Mhd Zaher Ghaibeh" \
+      org.label-schema.name="zaherg/php-and-nginx:latest" \
+      org.label-schema.description="Lightweight container with Nginx & PHP-FPM 7.4 based on Alpine Linux." \
       org.label-schema.url="https://www.zaher.dev" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-url="https://github.com/zaherg/php-and-nginx.git" \
@@ -28,8 +28,8 @@ RUN set -ex \
     && echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk upgrade \
-    && apk add --no-cache nginx git curl openssh-client ca-certificates icu rsyslog logrotate runit curl \
-            icu libpng freetype libjpeg-turbo postgresql-dev libffi-dev \
+    && apk add --no-cache nginx git curl openssh-client ca-certificates icu logrotate runit curl \
+            icu libpng freetype libjpeg-turbo postgresql-dev libffi-dev libzip-dev \
     && apk add --no-cache --virtual build-dependencies icu-dev g++ make autoconf \
             libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev
 
@@ -45,8 +45,8 @@ RUN docker-php-source extract \
     && docker-php-ext-enable redis opcache \
     && docker-php-source delete \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath
+    && docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j"$(nproc)" intl sockets pgsql pdo_mysql pdo_pgsql zip gd bcmath
 
 RUN sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf \

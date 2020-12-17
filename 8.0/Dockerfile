@@ -25,6 +25,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 COPY root/. /
 
 RUN set -ex \
+    && echo "@main http://dl-4.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@community http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
     && echo "@testing http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk upgrade \
@@ -51,6 +52,9 @@ RUN docker-php-source extract \
 RUN sed -i 's/user = www-data/user = nginx/' /usr/local/etc/php-fpm.d/www.conf \
     && sed -i 's/group = www-data/group = nginx/' /usr/local/etc/php-fpm.d/www.conf \
     && mkdir /run/nginx
+
+RUN curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/master/contrib/install.sh | sh -s -- -b /usr/local/bin \
+    && trivy filesystem --exit-code 1 --no-progress /
 
 RUN rm -rf /var/cache/apk/* /var/www/localhost /var/www/html \
     && apk del build-dependencies && rm -rf /tmp/*
